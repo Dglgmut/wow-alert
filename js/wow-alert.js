@@ -3,7 +3,8 @@
 
 
         var defaults = {
-            label: "OK",
+            labelYes: "Sim",
+            labelNo:  "Não",
             autoClose: true
         };
 
@@ -31,11 +32,19 @@
         }
 
         function createWindow(msg) {
-            var elements = $("<div class='wow-alert-overlay'></div><div class='wow-alert-content'><p>" + msg + "</p><a href='#'>" + this.options.label + "</a></div>");
+            var elements = $("<div class='wow-alert-overlay'></div><div class='wow-alert-content'><p>" +
+                             msg +
+                             "</p><div class='wow-alert-buttons'><a id='false' href='#'>" +
+                             this.options.labelNo +
+                             "</a><a id='true' href='#'>" +
+                             this.options.labelYes +
+                             "</a></div></div>");
+
             this._alertOverlay = $(elements[0]);
             this._alertWindow = $(elements[1]);
 
-            this._actionButton = this._alertWindow.find('a');
+            this._actionButtonNo = this._alertWindow.find('a#false');
+            this._actionButtonYes = this._alertWindow.find('a#true');
 
             this._alertOverlay.appendTo("body");
             this._alertWindow.appendTo("body");
@@ -46,10 +55,16 @@
         function configureActions() {
             var context = this;
 
-            this._actionButton.bind('click', function (e) {
+            this._actionButtonYes.bind('click', function (e) {
                 e.preventDefault();
                 if (context.options.autoClose) close();
-                if (context.options.success) context.options.success();
+                if (context.options.callback) context.options.callback(true);
+            });
+
+            this._actionButtonNo.bind('click', function (e) {
+                e.preventDefault();
+                if (context.options.autoClose) close();
+                if (context.options.callback) context.options.callback(false);
             });
         }
 
@@ -57,13 +72,18 @@
             this._alertOverlay.remove();
             this._alertWindow.remove();
         }
-        window.alert = function (msg, opts) {
+        window.confirm = function (msg, opts) {
             this.options = $.extend(defaults, opts);
-
             createWindow(msg);
             centerWindow();
             configureActions();
+        }
 
+        window.alert = function (msg, opts) {
+            this.options = $.extend(defaults, opts);
+            createWindow(msg);
+            centerWindow();
+            configureActions();
         }
 
     }(jQuery));

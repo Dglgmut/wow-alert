@@ -13,7 +13,8 @@
     -moz-transition: all .5s ease-in-out;
     -o-transition: all .5s ease-in-out;
     -ms-transition: all .5s ease-in-out;
-    background:#FFF;
+    background:#1a1a1a;
+    border: 1px solid #4a4a4c;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
@@ -30,7 +31,7 @@
 .wow-alert-content p {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 14px;
-    color: #333;
+    color: #fff;
     margin: 10px 0 20px 0;
     font-weight: bold;
     text-align: center;
@@ -49,16 +50,16 @@
     font-weight: bold;
     font-size: 11px;
     text-align: center;
-    margin: 10px;
-    color: #F6FAF7;
+    float: left;
+    margin: 20px 50px;
+    color: #252525;
     display: block;
-    margin: 0 auto;
     width: 100px;
-    background: #579959;
+    background: #f9b418;
     text-decoration: none;
     height: 30px;
     line-height: 30px;
 }
 .wow-alert-content a:hover {
-    background: #477F4A;
+    background: #d89300;
 }
