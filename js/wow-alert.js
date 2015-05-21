@@ -89,6 +89,7 @@
             this._alertWindow.remove();
         }
         window.confirm = function (msg, opts) {
+            window.event.preventDefault()
             this.options = $.extend(defaults, opts);
             createWindow("confirm", msg);
             centerWindow();
@@ -96,6 +97,7 @@
         }
 
         window.alert = function (msg, opts) {
+            window.event.preventDefault()
             this.options = $.extend(defaults, opts);
             createWindow("alert", msg);
             centerWindow();
